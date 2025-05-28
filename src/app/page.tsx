@@ -1,5 +1,8 @@
-export default function Home() {
+import NavMenu from "@/components/ui/navMenu";
+export default function Dashboard() {
   return (
-    <p>Hello World</p>
+    <div className="page">
+      <NavMenu></NavMenu>
+    </div>
   );
 }
