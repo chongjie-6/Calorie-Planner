@@ -111,8 +111,5 @@ input::-webkit-inner-spin-button {
   .nav_btns{
     @apply p-2 rounded-xl transition-all duration-300 hover:scale-110 w-full h-full text-xl font-semibold flex justify-center items-center
   }
-
-  .generate_btn{
-    @apply absolute top-15 right-1/2
-  }
+  
 }

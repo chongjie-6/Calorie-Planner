@@ -2,8 +2,8 @@ import RequirementForm from "../../components/ui/requirementForm";
 
 export default function Settings() {
   return (
-    <main className="page">
+    <div className="page">
         <RequirementForm></RequirementForm>
-    </main>
+    </div>
   );
 }
