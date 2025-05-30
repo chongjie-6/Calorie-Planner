@@ -5,14 +5,15 @@ import generateMealPlan from "../actions/generateMealPlan";
 export default function Generate() {
   const [response, setResponse] = useState<string | undefined>("");
   const onClick = async () => {
-    // When we click generate we need to retrieve from local storage
     try {
+      // Get from Local Storage.
       const calories = Number(localStorage.getItem("calories"));
       const carbs = Number(localStorage.getItem("carbs"));
       const fats = Number(localStorage.getItem("fats"));
       const meals = Number(localStorage.getItem("meals"));
       const protein = Number(localStorage.getItem("protein"));
 
+      // Server Action to generate meal plan and return in JSON and update in database.
       const response = await generateMealPlan({
         calories,
         carbs,
@@ -20,8 +21,8 @@ export default function Generate() {
         meals,
         protein,
       });
+      
       setResponse(response ? JSON.parse(response) : "");
-      console.log(response);
     } catch (e) {
       console.log(e);
     }

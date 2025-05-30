@@ -37,19 +37,23 @@ export default async function generateMealPlan(
     ]
     }`;
 
-    // create client
+    // Create Gemini Client
     const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API });
 
-    // Make the request
     try {
+        // Generate response based on prompt
         const response = await ai.models.generateContent({
             model: "gemini-2.0-flash",
             contents: PROMPT,
         });
-        return response.text
+
+        const formattedResponse = response.text
             ?.replace("json", "")
             .replace("```", "")
             .replace("```", "");
+
+        return formattedResponse;
+
     } catch (e) {
         console.log(e);
     }
