@@ -1,41 +1,18 @@
-"use client";
-import { useState } from "react";
-import generateMealPlan from "../actions/generateMealPlan";
+import GenerateButton from "@/components/ui/generateButton";
+import { auth0 } from "@/lib/auth0";
+import { redirect } from "next/navigation";
 
-export default function Generate() {
-  const [response, setResponse] = useState<string | undefined>("");
-  const onClick = async () => {
-    try {
-      // Get from Local Storage.
-      const calories = Number(localStorage.getItem("calories"));
-      const carbs = Number(localStorage.getItem("carbs"));
-      const fats = Number(localStorage.getItem("fats"));
-      const meals = Number(localStorage.getItem("meals"));
-      const protein = Number(localStorage.getItem("protein"));
+export default async function Generate() {
+  // Check if user is logged in
+  const user = await auth0.getSession();
 
-      // Server Action to generate meal plan and return in JSON and update in database.
-      const response = await generateMealPlan({
-        calories,
-        carbs,
-        fats,
-        meals,
-        protein,
-      });
-      
-      setResponse(response ? JSON.parse(response) : "");
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  if (!user) {
+    redirect("/auth/login");
+  }
 
   return (
     <div className="page">
-      <button
-        className="generate_btn primary_btn hover:bg-red-500"
-        onClick={() => onClick()}
-      >
-        Generate
-      </button>
+      <GenerateButton></GenerateButton>
     </div>
   );
 }
