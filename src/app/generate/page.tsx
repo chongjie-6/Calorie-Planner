@@ -1,18 +1,63 @@
+"use client";
+
 import GenerateButton from "@/components/ui/generateButton";
-import { auth0 } from "@/lib/auth0";
+import { useUser } from "@auth0/nextjs-auth0";
 import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+import generateMealPlan from "../actions/generateMealPlan";
+import AddMealPlan from "../actions/addMealPlan";
+import MealPlan from "@/components/ui/mealPlan";
+import { MealPlanProps } from "../types/types";
 
-export default async function Generate() {
+export default function Generate() {
   // Check if user is logged in
-  const user = await auth0.getSession();
+  const { user, isLoading } = useUser();
+  const [mealPlan, setMealPlan] = useState<MealPlanProps | undefined>();
+  const [isGenerating, setIsGenerating] = useState(false);
 
-  if (!user) {
-    redirect("/auth/login");
-  }
+  useEffect(() => {
+    if (!user && !isLoading) {
+      redirect("/auth/login");
+    }
+  }, [isLoading, user]);
 
+  // Generate a plan and add to database
+  const generatePlan = async () => {
+    try {
+      setIsGenerating(true);
+      // Get from Local Storage.
+      const calories = Number(localStorage.getItem("calories"));
+      const carbs = Number(localStorage.getItem("carbs"));
+      const fats = Number(localStorage.getItem("fats"));
+      const meals = Number(localStorage.getItem("meals"));
+      const protein = Number(localStorage.getItem("protein"));
+
+      // Server Action to generate meal plan and return in JSON and update in database.
+      const response = await generateMealPlan({
+        calories,
+        carbs,
+        fats,
+        meals,
+        protein,
+      });
+
+      if (!response) {
+        throw new Error(
+          "There was an error generating your meal plan. Please try again"
+        );
+      }
+      setMealPlan(JSON.parse(response));
+      AddMealPlan(response);
+      setIsGenerating(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div className="page">
-      <GenerateButton></GenerateButton>
+      <GenerateButton onClick={() => generatePlan()}></GenerateButton>
+      {isGenerating && <p>Loading...</p>}
+      <MealPlan mealPlan={mealPlan}></MealPlan>
     </div>
   );
 }

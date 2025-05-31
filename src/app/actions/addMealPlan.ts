@@ -1,8 +1,17 @@
 "use server"
+import { auth0 } from "@/lib/auth0";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-export default async function AddMealPlan(){
+import { redirect } from "next/navigation";
+export default async function AddMealPlan(data: string){
     try{
+        // Get user from auth0
+        const user = await auth0.getSession();
+        
+        if (!user) {
+            redirect("/auth/login");
+        }
+
         // Create client and push data into dynamodb
         const client = new DynamoDBClient({
             region: process.env.AWS_REGION,
@@ -16,9 +25,9 @@ export default async function AddMealPlan(){
         const command = new PutCommand({
             TableName: "CalorieTable",
             Item: {
-                user_id: "USER#1234",
-                name: "Alice",
-                age: "29",
+                user_id: user?.user.sub,
+                sk: "CURRENT_MEAL_PLAN",
+                meal: data,
             },
         });
 
