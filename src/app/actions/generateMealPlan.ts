@@ -35,7 +35,7 @@ export default async function generateMealPlan(
         "instructions": []
         }
     ]
-    }`;
+    } please use units of kcal for calories and g for everything else`;
 
     // Create Gemini Client
     const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GEMINI_API });

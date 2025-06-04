@@ -96,6 +96,7 @@ input::-webkit-inner-spin-button {
   .page{
     @apply flex flex-col items-center justify-center h-screen
   }
+
   .form_container{
     @apply flex flex-col items-center justify-center
   }
@@ -112,4 +113,39 @@ input::-webkit-inner-spin-button {
     @apply p-2 rounded-xl transition-all duration-300 hover:scale-110 w-full h-full text-xl font-semibold flex justify-center items-center
   }
   
+  .titleText{
+    @apply text-xl font-medium
+  }
+
+  .cardText{
+    @apply text-xl font-medium
+  }
+
+  .cardDescription{
+    @apply text-sm font-light
+  }
+
+  .card{
+    @apply p-5 border rounded-md flex flex-col items-center justify-center bg-zinc-800
+  }
+
+  .cardPage{
+    @apply w-full max-w-3xl space-y-5
+  }
+  
+  .mealDescription{
+    @apply text-lg font-bold flex flex-col items-center w-full p-3 border rounded-md 
+  }
+
+  .mealNutrition{
+    @apply flex flex-row w-full justify-between gap-3
+  }
+
+  .allMealCard{
+    @apply flex flex-col gap-y-5
+  }
+
+  .mealCard{
+    @apply p-3 border rounded-md space-y-5
+  }
 }
