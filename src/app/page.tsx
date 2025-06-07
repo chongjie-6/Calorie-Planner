@@ -1,7 +1,7 @@
 import NavMenu from "@/components/ui/navMenu";
 export default function Dashboard() {
   return (
-    <div className="page">
+    <div className="page h-screen">
       <a href="/auth/login">Login</a>
       <a href="/auth/logout">Logout</a>
       <NavMenu></NavMenu>

@@ -13,6 +13,12 @@ export type MealProps = {
   protein: number;
   carbohydrates: number;
   fat: number;
-  ingredients: Array<{ item: string; quantity: number; unit: string }>;
+  ingredients: Array<IngredientProps>;
   instructions: Array<string>;
 };
+
+export type IngredientProps = {
+   item: string; 
+   quantity: number; 
+   unit: string 
+}

@@ -151,8 +151,8 @@ export default function Generate() {
   return (
     <div className="page">
       <GenerateButton onClick={() => generatePlan()}></GenerateButton>
-      {isGenerating && <p>Loading...</p>}
-      <MealPlan mealPlan={MEALS}></MealPlan>
+      {isGenerating && <p>Generating...</p>}
+      <MealPlan mealPlan={mealPlan}></MealPlan>
     </div>
   );
 }

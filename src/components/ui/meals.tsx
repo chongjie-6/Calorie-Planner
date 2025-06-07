@@ -1,4 +1,6 @@
 import { MealProps } from "@/app/types/types";
+import IngredientsAccordian from "./ingredientsAccordian";
+import InstructionsAccordian from "./instructionsAccordian";
 
 export default function Meals({ meals }: { meals: MealProps[] }) {
   return (
@@ -7,9 +9,7 @@ export default function Meals({ meals }: { meals: MealProps[] }) {
         return (
           <div key={meal.meal_name} className="mealCard">
             <div className="flex flex-row items-center gap-x-5">
-              <div className="flex items-center justify-center rounded-full p-5 bg-cyan-500 text-white w-10 h-10">
-                {index + 1}
-              </div>
+              <div className="mealNumberCircle font-bold">{index + 1}</div>
               <div>
                 <p className="titleText">{meal.meal_name}</p>
                 <p className="textDescription">{meal.calories} calories</p>
@@ -26,6 +26,8 @@ export default function Meals({ meals }: { meals: MealProps[] }) {
                 {meal.fat}g <span className="font-light">Fat</span>
               </p>
             </div>
+            <IngredientsAccordian meal={meal}></IngredientsAccordian>
+            <InstructionsAccordian meal={meal}></InstructionsAccordian>
           </div>
         );
       })}

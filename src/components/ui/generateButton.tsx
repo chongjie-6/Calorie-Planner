@@ -5,7 +5,7 @@ export default function GenerateButton({
 }) {
   return (
     <button
-      className="generate_btn primary_btn hover:bg-red-500"
+      className="mt-10 primary_btn hover:bg-red-500"
       onClick={() => onClick()}
     >
       Generate

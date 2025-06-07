@@ -94,7 +94,7 @@ input::-webkit-inner-spin-button {
 
 @layer components{
   .page{
-    @apply flex flex-col items-center justify-center h-screen
+    @apply flex flex-col items-center justify-center
   }
 
   .form_container{
@@ -142,10 +142,22 @@ input::-webkit-inner-spin-button {
   }
 
   .allMealCard{
-    @apply flex flex-col gap-y-5
+    @apply flex flex-col gap-y-5 mb-20
   }
 
   .mealCard{
-    @apply p-3 border rounded-md space-y-5
+    @apply p-3 border rounded-md space-y-3
+  }
+
+  .mealNumberCircle{
+    @apply flex items-center justify-center rounded-full p-5 bg-blue-500 text-white w-10 h-10
+  }
+
+  .accordianTitle{
+    @apply inline-flex items-center justify-between border rounded-md bg-zinc-800 p-2 hover:bg-zinc-800/50
+  }
+
+  .accordianChildren{
+    @apply flex justify-between p-2 border rounded-md my-1
   }
 }
