@@ -1,3 +1,4 @@
+"use client"
 import { MealProps } from "@/app/types/types";
 import { useState } from "react";
 

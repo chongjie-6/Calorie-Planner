@@ -23,10 +23,10 @@ export default async function AddMealPlan(data: string){
         const docClient = DynamoDBDocumentClient.from(client);
 
         const command = new PutCommand({
-            TableName: "CalorieTable",
+            TableName: "NutritionTable",
             Item: {
                 user_id: user?.user.sub,
-                sk: "CURRENT_MEAL_PLAN",
+                date_time: new Date().toISOString(),
                 meal: data,
             },
         });

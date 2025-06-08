@@ -1,4 +1,5 @@
 export type MealPlanProps = {
+  date_time: string;
   total_calories: number;
   total_protein: number;
   total_carbohydrates: number;

@@ -11,10 +11,12 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
 export default function RequirementForm() {
+  const router = useRouter();
   /* Create a form object */
   const formSchema = z.object({
     calories: z.coerce.number().max(10000, "Maximum 10000 calories"),
@@ -47,6 +49,7 @@ export default function RequirementForm() {
     localStorage.setItem("fats", String(values.fats));
     localStorage.setItem("meals", String(values.meals));
     localStorage.setItem("protein", String(values.protein));
+    router.push("/");
   };
   return (
     <Form {...form}>

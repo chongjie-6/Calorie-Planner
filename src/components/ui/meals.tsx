@@ -5,7 +5,7 @@ import InstructionsAccordian from "./instructionsAccordian";
 export default function Meals({ meals }: { meals: MealProps[] }) {
   return (
     <div className="allMealCard">
-      {meals.map((meal, index) => {
+      {meals && meals.map((meal, index) => {
         return (
           <div key={meal.meal_name} className="mealCard">
             <div className="flex flex-row items-center gap-x-5">

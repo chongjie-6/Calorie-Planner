@@ -12,7 +12,7 @@ export default async function Settings() {
   }
 
   return (
-    <div className="page">
+    <div className="page min-h-screen">
       <RequirementForm></RequirementForm>
     </div>
   );

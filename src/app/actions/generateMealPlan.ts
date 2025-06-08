@@ -1,5 +1,6 @@
 "use server";
 import { GoogleGenAI } from "@google/genai";
+import { revalidateTag } from "next/cache";
 
 type GenerateMealPlanProps = {
     calories: number | null;
@@ -52,6 +53,7 @@ export default async function generateMealPlan(
             .replace("```", "")
             .replace("```", "");
 
+        revalidateTag("meal")
         return formattedResponse;
 
     } catch (e) {

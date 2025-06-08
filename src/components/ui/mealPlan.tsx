@@ -21,7 +21,7 @@ export default function MealPlan({
           <Meals meals={mealPlan.meals}/>
         </div>
       ) : (
-        <p>Generate a Meal Plan</p>
+        <p>You have no current meal plan.</p>
       )}
     </>
   );

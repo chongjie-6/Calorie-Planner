@@ -1,6 +1,7 @@
 import { auth0 } from "@/lib/auth0";
 import { redirect } from "next/navigation";
-import fetchMealPlan from "../actions/fetchMealPlan";
+import fetchMealPlan from "../actions/fetchPreviousMealPlan";
+import MealPlan from "@/components/ui/mealPlan";
 
 export default async function CurrentMealPlan() {
   // Check if user is logged in
@@ -11,7 +12,12 @@ export default async function CurrentMealPlan() {
   }
 
   const response = await fetchMealPlan();
-  console.log(response);
+  const latestMealPlan = response.Items?.[0];
 
-  return <div>Current Meal Plan</div>;
+  return (
+    <div className="page space-y-10 mt-10">
+      <h1 className="text-2xl font-bold">Current Meal Plan</h1>
+      <MealPlan mealPlan={latestMealPlan? JSON.parse(latestMealPlan?.meal) : ""}></MealPlan>
+    </div>
+  );
 }
