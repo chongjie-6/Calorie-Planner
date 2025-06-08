@@ -13,7 +13,7 @@ export default function NavMenu() {
         <Link className="nav_btns hover:bg-sky-500" href={"/current"}>
           Current Meal Plan
         </Link>
-        <Link className="nav_btns hover:bg-rose-500" href={"/previous"}>
+        <Link className="nav_btns hover:bg-rose-500" href={"/previous?page=1"}>
           Previous Meal Plans
         </Link>
         <Link className="nav_btns hover:bg-lime-500" href={"/recipes"}>
