@@ -17,7 +17,9 @@ export default async function CurrentMealPlan() {
   return (
     <div className="page space-y-10 mt-10">
       <h1 className="text-2xl font-bold">Current Meal Plan</h1>
-      <MealPlan mealPlan={latestMealPlan? JSON.parse(latestMealPlan?.meal) : ""}></MealPlan>
+      <MealPlan
+        mealPlan={latestMealPlan ? JSON.parse(latestMealPlan?.meal) : ""}
+      ></MealPlan>
     </div>
   );
 }

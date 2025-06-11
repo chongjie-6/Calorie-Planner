@@ -5,6 +5,7 @@ import { MealPlanProps } from "../types/types";
 import { fetchAllMealPlan } from "../actions/fetchAllMealPlans";
 import AllMealsCards from "@/components/ui/allMealsCard";
 import Pagination from "@/components/ui/pagination";
+import Link from "next/link";
 
 export default async function PreviousMealPlan(props: {
   searchParams?: Promise<{
@@ -39,15 +40,17 @@ export default async function PreviousMealPlan(props: {
 
   return (
     <div className="page">
+      <Link href={"/"} className="block mt-5 hover:text-blue-500">Back To Home</Link>
       {paginatedMealPlans?.map((plan, index) => (
         <AllMealsCards
-          key={index}
+          key={`${plan.date_time}-${pageNum}-${index}`}
           mealPlan={plan.meal as MealPlanProps}
           date_time={new Date(plan.date_time).toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
             day: "numeric",
           })}
+          index = {index}
         />
       ))}
       <Pagination

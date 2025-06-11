@@ -7,12 +7,15 @@ import generateMealPlan from "../actions/generateMealPlan";
 import AddMealPlan from "../actions/addMealPlan";
 import MealPlan from "@/components/ui/mealPlan";
 import { MealPlanProps } from "../types/types";
+import RadioBox from "@/components/ui/radioBox";
 
 export default function Generate() {
   // Check if user is logged in
   const { user, isLoading } = useUser();
   const [mealPlan, setMealPlan] = useState<MealPlanProps | undefined>();
   const [isGenerating, setIsGenerating] = useState(false);
+  const [experimental, setExperimental] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!user && !isLoading) {
@@ -33,11 +36,16 @@ export default function Generate() {
 
       // Server Action to generate meal plan and return in JSON and update in database.
       const response = await generateMealPlan({
-        calories,
-        carbs,
-        fats,
-        meals,
-        protein,
+        nutrition_info: {
+          calories,
+          carbs,
+          fats,
+          meals,
+          protein,
+        },
+        model: experimental
+          ? "gemini-2.5-flash-preview-05-20"
+          : "gemini-2.0-flash",
       });
 
       if (!response) {
@@ -49,13 +57,19 @@ export default function Generate() {
       AddMealPlan(response);
       setIsGenerating(false);
     } catch (e) {
-      console.log(e);
+      setIsGenerating(false);
+      setError(String(e));
     }
   };
+
   return (
-    <div className="page">
+    <div className="page space-y-2">
       <GenerateButton onClick={() => generatePlan()}></GenerateButton>
+      {!mealPlan && !isGenerating && (
+        <RadioBox setExperimental={setExperimental}></RadioBox>
+      )}
       {isGenerating && <p>Generating...</p>}
+      {error && !isGenerating && !mealPlan &&<p className="text-red-500">{error}</p>}
       <MealPlan mealPlan={mealPlan}></MealPlan>
     </div>
   );

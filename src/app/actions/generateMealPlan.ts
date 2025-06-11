@@ -10,9 +10,9 @@ type GenerateMealPlanProps = {
     protein: number | null;
 };
 
-export default async function generateMealPlan(
-    nutrition_info: GenerateMealPlanProps
-): Promise<string | undefined> {
+export default async function generateMealPlan({
+  nutrition_info, model
+}: { nutrition_info: GenerateMealPlanProps; model: "gemini-2.5-flash-preview-05-20" | "gemini-2.0-flash"; }): Promise<string | undefined> {
     const PROMPT = `You are a chef creating single-day meal plans based on nutritional inputs: Calories, Protein, Carbohydrates, Fat, and Number of Meals. 
     If a value is 0, you may choose it freely. Create a meal plan that meets the specified requirements, with detailed cooking instructions for each meal.
     Use the following input values:${nutrition_info.calories} ${nutrition_info.protein} ${nutrition_info.carbs} ${nutrition_info.fats} ${nutrition_info.meals}
@@ -44,7 +44,7 @@ export default async function generateMealPlan(
     try {
         // Generate response based on prompt
         const response = await ai.models.generateContent({
-            model: "gemini-2.0-flash",
+            model: `${model}`,
             contents: PROMPT,
         });
 
@@ -54,6 +54,7 @@ export default async function generateMealPlan(
             .replace("```", "");
 
         revalidateTag("meal")
+        console.log(formattedResponse)
         return formattedResponse;
 
     } catch (e) {

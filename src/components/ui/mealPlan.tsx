@@ -18,10 +18,10 @@ export default function MealPlan({
             fats={mealPlan.total_fat}
           />
           <h2 className="titleText">Meals ({mealPlan.number_of_meals})</h2>
-          <Meals meals={mealPlan.meals}/>
+          <Meals meals={mealPlan.meals} />
         </div>
       ) : (
-        <p>You have no current meal plan.</p>
+        ""
       )}
     </>
   );
