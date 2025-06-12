@@ -68,8 +68,16 @@ export default function Generate() {
       {!mealPlan && !isGenerating && (
         <RadioBox setExperimental={setExperimental}></RadioBox>
       )}
-      {isGenerating && <p>Generating...</p>}
-      {error && !isGenerating && !mealPlan &&<p className="text-red-500">{error}</p>}
+      {isGenerating && (
+        <div className="flex flex-col justify-center items-center p-4 space-x-5">
+          <p>Generating your meal...</p>
+          <p>Grab a coffee and come back!</p>
+          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-500"></div>
+        </div>
+      )}
+      {error && !isGenerating && !mealPlan && (
+        <p className="text-red-500">{error}</p>
+      )}
       <MealPlan mealPlan={mealPlan}></MealPlan>
     </div>
   );

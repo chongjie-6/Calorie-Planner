@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import { MealProps } from "@/app/types/types";
 import { useState } from "react";
 
 export default function InstructionsAccordian({ meal }: { meal: MealProps }) {
   const [accordianActive, setAccordianActive] = useState(false);
   return (
-    <div className="flex flex-col">
+    <ul className="flex flex-col">
       <div
         className="accordianTitle"
         onClick={() => setAccordianActive((prev) => !prev)}
@@ -41,17 +41,17 @@ export default function InstructionsAccordian({ meal }: { meal: MealProps }) {
           </svg>
         )}
       </div>
-      <div className="mt-2">
+      <ul className="mt-2">
         {accordianActive &&
           meal.instructions.map((instructions, index) => {
             return (
-              <p key={index}>
+              <li key={index}>
                 <span className="font-semibold">{index + 1}.</span>{" "}
                 {instructions}
-              </p>
+              </li>
             );
           })}
-      </div>
-    </div>
+      </ul>
+    </ul>
   );
 }

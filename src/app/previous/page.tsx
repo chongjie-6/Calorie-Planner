@@ -40,7 +40,9 @@ export default async function PreviousMealPlan(props: {
 
   return (
     <div className="page">
-      <Link href={"/"} className="block mt-5 hover:text-blue-500">Back To Home</Link>
+      <Link href={"/"} className="block mt-5 hover:text-blue-500">
+        Back To Home
+      </Link>
       {paginatedMealPlans?.map((plan, index) => (
         <AllMealsCards
           key={`${plan.date_time}-${pageNum}-${index}`}
@@ -50,7 +52,7 @@ export default async function PreviousMealPlan(props: {
             month: "long",
             day: "numeric",
           })}
-          index = {index}
+          index={index}
         />
       ))}
       <Pagination

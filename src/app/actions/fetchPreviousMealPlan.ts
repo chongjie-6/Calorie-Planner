@@ -1,3 +1,4 @@
+"use server"
 import { auth0 } from "@/lib/auth0";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, QueryCommand } from "@aws-sdk/lib-dynamodb";

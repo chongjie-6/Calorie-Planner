@@ -12,24 +12,24 @@ export default function MealPlanNutrition({
   return (
     <div className="cardPage">
       <h1 className="titleText">Total Nutritional Information</h1>
-      <div className="grid grid-cols-2 cardText gap-2">
-        <div className="card">
+      <ul className="grid grid-cols-2 cardText gap-2">
+        <li className="card">
           <p>{calories}</p>
           <p className="cardDescription">Calories kcal</p>
-        </div>
-        <div className="card">
+        </li>
+        <li className="card">
           <p>{protein}</p>
           <p className="cardDescription">Protein g</p>
-        </div>
-        <div className="card">
+        </li>
+        <li className="card">
           <p>{carbs}</p>
           <p className="cardDescription">Carbohydrates g</p>
-        </div>
-        <div className="card">
+        </li>
+        <li className="card">
           <p>{fats}</p>
           <p className="cardDescription">Fats g</p>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   );
 }

@@ -22,10 +22,7 @@ export default function AllMealsCards({
 
   return (
     <>
-      <Modal
-        modalRef={modalRef}
-        mealPlan={mealPlan}
-      ></Modal>
+      <Modal modalRef={modalRef} mealPlan={mealPlan}></Modal>
       <div
         className="flex flex-col max-w-3xl w-full mt-2 animate-fade-in cursor-pointer"
         style={{
@@ -37,16 +34,16 @@ export default function AllMealsCards({
           <h2 className="titleText px-2">{date_time}</h2>
           <p>{mealPlan?.total_calories} kcal</p>
         </div>
-        <div className="bg-zinc-600">
+        <ul className="bg-zinc-600">
           {mealPlan?.meals.map((meal, index) => (
-            <p
+            <li
               className="px-3 text-sm text-gray-900 last:rounded-b-md last:pb-2"
               key={index}
             >
               {meal.meal_name}
-            </p>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </>
   );
